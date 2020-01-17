@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Example {
@@ -37,7 +38,7 @@ public class Example {
         return sentence.toString();
     }
 
-    // Write a method to check if a string has all unique characters
+    // 1.1 Write a method to check if a string has all unique characters
     // TimeL O(N) | Space: O(N)
     public static boolean isUnique(String sentence){
         // Use a dictionary to track the number of characters and their count
@@ -62,7 +63,7 @@ public class Example {
         return true;
     }
 
-    // Solution: Write a method to check if a string has all unique characters
+    // 1.1 Solution: Write a method to check if a string has all unique characters
     // Time: O(N) | Space: O(1) - the size is always the same, 128
     public static boolean isUnique2(String sentence) {
         boolean[] characters = new boolean[128];
@@ -78,11 +79,28 @@ public class Example {
         return true;
     }
 
+    // 1.2 Check Permutation, Given two strings, check whether they are permuation of each other
+    // Time: O(N Log N) - Sorting | Space: O(N)
+    public static boolean checkPermutation(String s1, String s2) {
+        char[] s1Chars = s1.toCharArray();
+        Arrays.sort(s1Chars);
+        char[] s2Chars = s2.toCharArray();
+        Arrays.sort(s2Chars);
+
+        return String.valueOf(s1Chars).equals(String.valueOf(s2Chars));
+    }
+
 
     public static void main(String[] args) {
 
+        String s1 = "abc";
+        String s2 = "bca";
+        System.out.println(checkPermutation(s1, s2));
+
+        /* Test for isUnique() method
         String s = "abbc";
         System.out.println(isUnique2(s));
+        */
         
         /* Test for joinWords method()
         String[] words = {"Hello", "World"};
