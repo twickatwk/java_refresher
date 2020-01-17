@@ -26,10 +26,20 @@ public class Example {
         return sentence;
     }
 
+    // Write a method to concatenate a list of string in O(N) time
+    // Time: O(N) | Space: O(N)
+    public static String joinWords2(String[] words){
+        StringBuilder sentence = new StringBuilder();
+        for (String word : words){
+            sentence.append(word);
+        }
+        return sentence.toString();
+    }
+
     public static void main(String[] args) {
 
         String[] words = {"Hello", "World"};
-        System.out.println(joinWords(words));
+        System.out.println(joinWords2(words));
 
 
 
