@@ -90,12 +90,74 @@ public class Example {
         return String.valueOf(s1Chars).equals(String.valueOf(s2Chars));
     }
 
+    // 1.3 URLify a given String. Example: "Mr John Smith   " ->  "Mr%20John%20Smith"
+    // Time: O(N) | Space: O(1)
+    public static String URLify(String s){
+
+        s = s.trim();
+        s = s.replaceAll("\\s+", "%20");
+
+        return s;
+    }
+
+    // 1.4 Palinedome Permutation: Given a String, check if it is a permutation of Palindrome
+    // Time: O(N) | Space: O(N)
+    public static boolean checkPalindomePermutation(String s){
+        // Remove any spaces between the words
+        s = s.replaceAll("\\s+", "");
+
+        s = s.toLowerCase();
+
+        HashMap<String, Integer> dict = new HashMap<String, Integer>();
+
+        int differenceMargin = 0;
+        if (s.length() % 2 == 1) {
+            differenceMargin = 1;
+        }
+
+        // Count the occurrences of each character in the string
+        for (int i = 0; i < s.length(); i++) {
+            if (dict.containsKey(s.charAt(i)+"")) {
+                dict.put(s.charAt(i)+"", dict.get(s.charAt(i)+"")+1);
+            }else {
+                dict.put(s.charAt(i)+"", 1);
+            }
+        }
+
+        
+
+        // Check the numbe of variance of characters in the string
+        for (String character:dict.keySet()){
+            int count = dict.get(character);
+            if (count % 2 == 1) {
+                differenceMargin--;
+            }
+            if (differenceMargin < 0) {
+                return false;
+            }
+        }
+
+        return true;
+
+
+    }
+
 
     public static void main(String[] args) {
 
+        String s = "Tact Coa";
+        System.out.println(checkPalindomePermutation(s));
+
+        /* Test for URLify() method 
+        String s = "Mr John Smith   ";
+        System.out.println(URLify(s));
+        */
+
+        /* Test for checkPermutation() method
         String s1 = "abc";
         String s2 = "bca";
         System.out.println(checkPermutation(s1, s2));
+        */
 
         /* Test for isUnique() method
         String s = "abbc";
