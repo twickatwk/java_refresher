@@ -63,11 +63,26 @@ public class Example {
     }
 
     // Solution: Write a method to check if a string has all unique characters
+    // Time: O(N) | Space: O(1) - the size is always the same, 128
+    public static boolean isUnique2(String sentence) {
+        boolean[] characters = new boolean[128];
+
+        for (int i = 0; i < sentence.length(); i++) {
+            int value = sentence.charAt(i); // Converts the char to the int representation
+            if (characters[value]) {
+                return false; // if the character's int represetation is true, means it already exists
+            }
+            characters[value] = true;
+        }
+
+        return true;
+    }
+
 
     public static void main(String[] args) {
 
         String s = "abbc";
-        System.out.println(isUnique(s));
+        System.out.println(isUnique2(s));
         
         /* Test for joinWords method()
         String[] words = {"Hello", "World"};
