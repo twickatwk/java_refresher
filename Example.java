@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Example {
 
@@ -36,11 +37,42 @@ public class Example {
         return sentence.toString();
     }
 
+    // Write a method to check if a string has all unique characters
+    // TimeL O(N) | Space: O(N)
+    public static boolean isUnique(String sentence){
+        // Use a dictionary to track the number of characters and their count
+        HashMap<Character, Integer> dict = new HashMap<Character, Integer>();
+        
+        for (int i = 0; i < sentence.length(); i++){
+            char c = sentence.charAt(i);
+            if (dict.containsKey(c)) {
+                dict.put(Character.valueOf(c), dict.get(Character.valueOf(c))+1);
+            }else{
+                dict.put(Character.valueOf(c), 1);
+            }
+        }
+
+        // return false if any of the count in the dictioary exceeds 1, else return true
+        for (Character character : dict.keySet()){
+            if (dict.get(character) > 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Solution: Write a method to check if a string has all unique characters
+
     public static void main(String[] args) {
 
+        String s = "abbc";
+        System.out.println(isUnique(s));
+        
+        /* Test for joinWords method()
         String[] words = {"Hello", "World"};
         System.out.println(joinWords2(words));
-
+        */
 
 
         /* Test for merge() method
