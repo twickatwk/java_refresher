@@ -139,14 +139,78 @@ public class Example {
 
         return true;
 
-
     }
 
+    // 1.5: Finding whether two strings are zero to 1 edit distance away
+    // Time: O(N) | Space: O(1)
+    public static boolean oneEditAway(String s1, String s2) {
+
+        if (s1.length() == s2.length()){
+            return oneEditReplace(s1, s2);
+        }
+        else if (s1.length() - 1 == s2.length()) {
+            return oneEditInsert(s2, s1);
+        } 
+        else if (s1.length() + 1 == s2.length()) {
+            return oneEditInsert(s1, s2);
+        }
+
+        return false; // This means that the two strings are more than 1 difference apart
+    }
+
+    static boolean oneEditReplace(String s1, String s2) {
+        boolean foundDifference = false;
+
+        for (int i = 0; i < s1.length(); i++){
+            if (s1.charAt(i) != s2.charAt(i)) {
+                // If a difference is already found before, and now again, it has been repaced more than once
+                if (foundDifference) {
+                    return false;
+                }
+                foundDifference = true;
+            }
+        }
+        
+        return true;
+    }
+
+    static boolean oneEditInsert(String s1, String s2){
+
+        int index1 = 0;
+        int index2 = 0;
+
+        while (index1 < s1.length() && index2 < s2.length()){
+            if(s1.charAt(index1) != s2.charAt(index2)) {
+
+                // If you already have added a character before, the index1 and index2 will not match, and this means that it is the second insert
+                if (index1 != index2) {
+                    return false;
+                }
+                // You assume that you add a character into s1 which is the smaller string, so increment the index of index2 of string 2
+                index2 += 1;
+            }else{
+                index1 += 1;
+                index2 += 1;
+            }
+        }
+
+        return true;
+    }
 
     public static void main(String[] args) {
 
+        /* Test for oneEditAway() method
+        String s1 = "pale";
+        String s2 = "bake";
+
+        System.out.println(oneEditAway(s1, s2));
+        */
+
+        
+        /* Test for checkPalindromePermutation
         String s = "Tact Coa";
         System.out.println(checkPalindomePermutation(s));
+        */
 
         /* Test for URLify() method 
         String s = "Mr John Smith   ";
