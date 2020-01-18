@@ -197,7 +197,38 @@ public class Example {
         return true;
     }
 
+    // 1.6: String Compression - Example: aaabccccaaa -> a3b1c4a3
+    // Time: O(N) | Space: O(N)
+    static String stringCompression(String s) {
+        
+        StringBuilder result = new StringBuilder();
+        
+        if (s.length() == 1){
+            return s + "1";
+        }
+
+        int count = 1;
+        char currentChar = s.charAt(0);
+        for (int i = 1; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (currentChar == c) {
+                count += 1;
+            }else{
+                result.append(""+currentChar+count);
+                currentChar = c;
+                count = 1;
+            }
+            if (i == s.length()-1){
+                result.append(""+currentChar+count);
+            }
+        }
+
+        return result.toString();
+    }
+
     public static void main(String[] args) {
+        String s = "aaabccccaaa";
+        System.out.println(stringCompression(s));
 
         /* Test for oneEditAway() method
         String s1 = "pale";
